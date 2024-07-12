@@ -6,8 +6,13 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/12 10:08:49 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:27:02 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 
+char *get_next_line(int fd)
+{
+
+}
