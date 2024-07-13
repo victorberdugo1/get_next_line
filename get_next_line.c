@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/12 13:27:02 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/13 17:02:10 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 char *get_next_line(int fd)
 {
+	static char	*line;
+
 
 }
