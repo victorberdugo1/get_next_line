@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 17:28:01 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/13 17:56:50 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:46:39 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ int main(int argc, char **argv)
     }
     fd = open(argv[1], O_RDONLY);
     if (fd < 0)
-    {
         return (1);
-    }
     while ((line = get_next_line(fd)) != NULL)
     {
         printf("%s\n", line);
