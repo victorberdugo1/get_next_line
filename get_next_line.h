@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:40 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/13 17:48:38 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/22 16:56:33 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@
 # endif
 
 char	*get_next_line(int fd);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+unsigned long	ft_strlen(const char *s);
 
 #endif
