@@ -6,11 +6,12 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:21 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/22 17:06:55 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:28:11 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "get_next_line.h"
 
 unsigned long	ft_strlen(const char *s)
 {
@@ -58,4 +59,36 @@ char	*ft_strchr(const char *s, int c)
 	if (c == '\0')
 		return ((char *)s);
 	return (0);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	src_len;
+	size_t	i;
+
+	src_len = ft_strlen(src);
+	i = 0;
+	if (size > 0)
+	{
+		while (i < size - 1 && src[i] != '\0')
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (src_len);
+}
+
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	char	*dup;
+
+	len = ft_strlen(s) + 1;
+	dup = (char *)malloc(len);
+	if (dup == NULL)
+		return (NULL);
+	ft_strlcpy(dup, s, len);
+	return (dup);
 }

@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/22 16:41:36 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/23 14:23:55 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,43 @@
 #include <unistd.h>
 #include <stdlib.h> 
 
-int	da_line(char *buffrd)
+int da_line(char **line)
 {
-	if (ft_strchr(buffrd, '\n'))
-		return (0);   
-	else
-		return (1);
+    char *newline_pos;
+    char *remainder;
+
+    newline_pos = ft_strchr(*line, '\n');
+    if (newline_pos != NULL)
+    {
+        *newline_pos = '\0';
+        remainder = ft_strdup(newline_pos + 1);
+        if (remainder == NULL)
+            return -1;
+        free(*line);
+        *line = remainder;
+        return 0;
+    }
+    return 1;
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*line;
+	char *buffer;
+	char *temp;
 	ssize_t		bytes_read;
 
 	line = (char *)malloc(BUFFER_SIZE + 1);
 	if (line == NULL)
 		return (NULL);
-	bytes_read = read(fd, line, BUFFER_SIZE);
-
+	while ((bytes_read = read(fd, line, BUFFER_SIZE)) > 0)
+	{	
+		temp = ft_strjoin(buffer, line);
+        free(line);
+        line = temp;
+        if (da_line(&line) == 0)
+            break;
+	}
 	if (bytes_read < BUFFER_SIZE)
 	{
 		if (bytes_read < 0)
