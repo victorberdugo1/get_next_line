@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:21 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/23 14:28:11 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/25 10:51:11 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+unsigned long	ft_strlcpy(char *dst, const char *src, unsigned long size)
 {
-	size_t	src_len;
-	size_t	i;
+	unsigned long	src_len;
+	unsigned long	i;
 
 	src_len = ft_strlen(src);
 	i = 0;

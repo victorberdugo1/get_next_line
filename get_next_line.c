@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:11:04 by victor           ###   ########.fr       */
+/*   Updated: 2024/07/25 11:43:58 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*get_line(char *buffer)
 	char	*line;
 
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
@@ -28,7 +28,7 @@ static char	*get_line(char *buffer)
 	if (!line)
 		return (NULL);
 	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while (buffer[i] != '\0' && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
 		i++;
@@ -42,7 +42,7 @@ static char	*get_line(char *buffer)
 	return (line);
 }
 
-static char	*update_buffer(char *buffer)
+static char	*remainder(char *buffer)
 {
 	int		i;
 	int		j;
@@ -50,7 +50,7 @@ static char	*update_buffer(char *buffer)
 
 	i = 0;
 	j = 0;
-	while (buffer[i] && buffer[i] != '\n')
+	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
@@ -62,7 +62,7 @@ static char	*update_buffer(char *buffer)
 	new_buffer = (char *)malloc(ft_strlen(buffer) - i + 1);
 	if (!new_buffer)
 		return (NULL);
-	while (buffer[i])
+	while (buffer[i] != '\0')
 		new_buffer[j++] = buffer[i++];
 	new_buffer[j] = '\0';
 	free(buffer);
@@ -127,6 +127,6 @@ char	*get_next_line(int fd)
 	line = get_line(buffer);
 	if (!line)
 		return (NULL);
-	buffer = update_buffer(buffer);
+	buffer = remainder(buffer);
 	return (line);
 }

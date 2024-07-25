@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:40 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/23 14:13:34 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:56:47 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,23 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE 42
 # endif
 
 # if BUFFER_SIZE <= 0
-#  error "BUFFER_SIZE can't be <= 0"
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# elif BUFFER_SIZE >= 10000
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 9999
 # endif
 
+
 char			*get_next_line(int fd);
+unsigned long	ft_strlen(const char *s);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strchr(const char *s, int c);
-unsigned long	ft_strlen(const char *s);
 char			*ft_strdup(const char *s);
+unsigned long	ft_strlcpy(char *dst, const char *src, unsigned long size);
 
 #endif
