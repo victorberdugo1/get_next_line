@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:40 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 15:04:14 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:07:27 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #  define BUFFER_SIZE 42
 # endif
 
-#ifndef OPEN_MAX
-#define OPEN_MAX 256
-#endif
+# ifndef MAX_FILES
+#  define MAX_FILES 256
+# endif
 
 # if BUFFER_SIZE <= 0
 #  undef BUFFER_SIZE

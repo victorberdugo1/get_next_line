@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 14:56:37 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 15:23:26 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:22:27 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,65 +16,86 @@
 #include <stdlib.h>
 #include "get_next_line_bonus.h"
 
-int main(int argc, char **argv)
+void	close_files(int fds[], int count)
 {
-    int fds[argc];
-    int num_files;
-    int i;
-    char *line;
-    char *filenames[argc]; 
-    int line_numbers[argc];
+	int	i;
 
-    if (argc == 1)
-    {
-        fds[0] = 0;
-        filenames[0] = "stdin";
-        line_numbers[0] = 1;
-        num_files = 1;
-    }
-    else
-    {
-        num_files = argc - 1;
-        for (i = 0; i < num_files; i++)
-        {
-            fds[i] = open(argv[i + 1], O_RDONLY);
-            if (fds[i] < 0)
-            {
-                while (i-- > 0)
-                    close(fds[i]);
-                return (1);
-            }
-            filenames[i] = argv[i + 1];
-            line_numbers[i] = 1;
-        }
-    }
-    i = 0;
-    while (num_files > 0)
-    {
-        line = get_next_line(fds[i]);
-        if (line == NULL)
-        {
-            if (fds[i] != 0)
-                close(fds[i]);
-            printf(".............End of %s.............\n", filenames[i]);
-            for (int j = i; j < num_files - 1; j++)
-            {
-                fds[j] = fds[j + 1];
-                filenames[j] = filenames[j + 1];
-                line_numbers[j] = line_numbers[j + 1];
-            }
-            num_files--;
-            if (i >= num_files)
-                i = 0;
-        }
-        else
-        {
-            printf("[%s] Line %d: %s", filenames[i], line_numbers[i], line);
-            free(line);
-            line_numbers[i]++;
-            i = (i + 1) % num_files;
-        }
-    }
-    return (0);
+	i = 0;
+	while (i < count)
+	{
+		close(fds[i]);
+		i++;
+	}
 }
 
+void	process_files(int num_files, int fds[], char *filenam[], int line_num[])
+{
+	int		i;
+	int		j;
+	char	*line;
+
+	i = 0;
+	while (num_files > 0)
+	{
+		line = get_next_line(fds[i]);
+		if (line == NULL)
+		{
+			if (fds[i] != 0)
+				close(fds[i]);
+			printf(".............End of %s.............\n", filenam[i]);
+			j = i;
+			while (j < num_files - 1)
+			{
+				fds[j] = fds[j + 1];
+				filenam[j] = filenam[j + 1];
+				line_num[j] = line_num[j + 1];
+				j++;
+			}
+			num_files--;
+			if (i >= num_files)
+				i = 0;
+		}
+		else
+		{
+			printf("[%s] Line %d: %s", filenam[i], line_num[i], line);
+			free(line);
+			line_num[i]++;
+			i = (i + 1) % num_files;
+		}
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	int		fds[MAX_FILES];
+	char	*filenames[MAX_FILES];
+	int		line_numbers[MAX_FILES];
+	int		num_files;
+	int		i;
+
+	if (argc == 1)
+	{
+		fds[0] = 0;
+		filenames[0] = "stdin";
+		line_numbers[0] = 1;
+		num_files = 1;
+	}
+	else
+	{
+		num_files = argc - 1;
+		if (num_files > MAX_FILES)
+			return (1);
+		i = 0;
+		while (i < num_files)
+		{
+			fds[i] = open(argv[i + 1], O_RDONLY);
+			if (fds[i] < 0)
+				return (close_files(fds, i), 1);
+			filenames[i] = argv[i + 1];
+			line_numbers[i] = 1;
+			i++;
+		}
+	}
+	process_files(num_files, fds, filenames, line_numbers);
+	return (0);
+}

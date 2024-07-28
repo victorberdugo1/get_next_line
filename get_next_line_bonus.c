@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 15:05:04 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 17:08:49 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ static char	*read_new_line(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffers[OPEN_MAX];
+	static char	*buffers[MAX_FILES];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= MAX_FILES)
 		return (NULL);
 	if (!buffers[fd])
 		buffers[fd] = ft_strdup("");
