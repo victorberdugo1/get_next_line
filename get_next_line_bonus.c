@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 13:48:04 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:05:04 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -90,22 +90,22 @@ static char	*read_new_line(int fd, char **buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffers[OPEN_MAX];
 	char		*line;
 
-	if (!buffer)
-		buffer = ft_strdup("");
-	if (!read_new_line(fd, &buffer))
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= OPEN_MAX)
 		return (NULL);
-	if (buffer[0] == '\0')
+	if (!buffers[fd])
+		buffers[fd] = ft_strdup("");
+	if (!read_new_line(fd, &buffers[fd]))
+		return (NULL);
+	if (!buffers[fd][0])
 	{
-		free(buffer);
-		buffer = NULL;
+		free(buffers[fd]);
+		buffers[fd] = NULL;
 		return (NULL);
 	}
-	line = get_line(buffer);
-	if (!line)
-		return (NULL);
-	buffer = remainder(buffer);
+	line = get_line(buffers[fd]);
+	buffers[fd] = remainder(buffers[fd]);
 	return (line);
 }

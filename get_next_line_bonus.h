@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:40 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 11:33:48 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 15:04:14 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+#ifndef OPEN_MAX
+#define OPEN_MAX 256
+#endif
 
 # if BUFFER_SIZE <= 0
 #  undef BUFFER_SIZE
