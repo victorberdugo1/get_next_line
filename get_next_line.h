@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:40 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/25 17:56:47 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 11:33:48 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 9999
 # endif
-
 
 char			*get_next_line(int fd);
 unsigned long	ft_strlen(const char *s);
