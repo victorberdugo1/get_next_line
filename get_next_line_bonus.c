@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line (copy).c                             :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 13:04:24 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/28 13:48:04 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,19 @@ static char	*remainder(char *buffer)
 	return (free(buffer), new_buffer);
 }
 
-static char	*readnewl2(int fd, char *temp_buffer, char **buffer)
+static char	*read_new_line(int fd, char **buffer)
 {
+	char	temp_buffer[BUFFER_SIZE + 1];
 	char	*tmp;
 	int		bytes_read;
 
 	while (!ft_strchr(*buffer, '\n'))
 	{
 		bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
-		if (bytes_read <= 0)
-		{
-			if (bytes_read < 0)
-				return (NULL);
-			break ;
-		}
+		if (bytes_read < 0)
+			return (NULL);
+		if (bytes_read == 0)
+			return (*buffer);
 		temp_buffer[bytes_read] = '\0';
 		tmp = ft_strjoin(*buffer, temp_buffer);
 		free(*buffer);
@@ -89,22 +88,6 @@ static char	*readnewl2(int fd, char *temp_buffer, char **buffer)
 	return (*buffer);
 }
 
-char	*readnewl(int fd, char **buffer)
-{
-	char	*temp_buffer;
-
-	temp_buffer = (char *)malloc(BUFFER_SIZE + 1);
-	if (!temp_buffer)
-		return (NULL);
-	if (!readnewl2(fd, temp_buffer, buffer))
-	{
-		free(temp_buffer);
-		return (NULL);
-	}
-	free(temp_buffer);
-	return (*buffer);
-}
-
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
@@ -112,7 +95,7 @@ char	*get_next_line(int fd)
 
 	if (!buffer)
 		buffer = ft_strdup("");
-	if (readnewl(fd, &buffer) == NULL)
+	if (!read_new_line(fd, &buffer))
 		return (NULL);
 	if (buffer[0] == '\0')
 	{
