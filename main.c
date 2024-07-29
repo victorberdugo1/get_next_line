@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 17:28:01 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/24 21:20:03 by victor           ###   ########.fr       */
+/*   Updated: 2024/07/29 15:28:16 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "get_next_line.h"
+//-D BUFFER_SIZE=9223372036854775807
 
 int	main(int argc, char **argv)
 {

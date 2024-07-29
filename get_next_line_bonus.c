@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 10:08:46 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 17:08:49 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/29 14:59:14 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,28 @@ static char	*remainder(char *buffer)
 
 static char	*read_new_line(int fd, char **buffer)
 {
-	char	temp_buffer[BUFFER_SIZE + 1];
+	char	*temp_buffer;
 	char	*tmp;
 	int		bytes_read;
 
+	temp_buffer = (char *)malloc(BUFFER_SIZE + 1);
+	if (!temp_buffer)
+		return (NULL);
 	while (!ft_strchr(*buffer, '\n'))
 	{
 		bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (NULL);
+			return (free(temp_buffer), NULL);
 		if (bytes_read == 0)
-			return (*buffer);
+			return (free(temp_buffer), *buffer);
 		temp_buffer[bytes_read] = '\0';
 		tmp = ft_strjoin(*buffer, temp_buffer);
 		free(*buffer);
 		if (!tmp)
-			return (NULL);
+			return (free(temp_buffer), NULL);
 		*buffer = tmp;
 	}
-	return (*buffer);
+	return (free(temp_buffer), *buffer);
 }
 
 char	*get_next_line(int fd)

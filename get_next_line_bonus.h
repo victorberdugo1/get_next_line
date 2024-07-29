@@ -6,7 +6,7 @@
 /*   By: vberdugo <vberdugo@student.42barcelon      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 11:00:40 by vberdugo          #+#    #+#             */
-/*   Updated: 2024/07/28 17:07:27 by vberdugo         ###   ########.fr       */
+/*   Updated: 2024/07/29 15:03:04 by vberdugo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@
 # if BUFFER_SIZE <= 0
 #  undef BUFFER_SIZE
 #  define BUFFER_SIZE 1
-# elif BUFFER_SIZE >= 10000
-#  undef BUFFER_SIZE
-#  define BUFFER_SIZE 9999
 # endif
 
 char			*get_next_line(int fd);
